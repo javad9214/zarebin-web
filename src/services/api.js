@@ -1,16 +1,17 @@
 const BASE_URL = import.meta.env.VITE_API_URL
 
 /**
- * Fetch a single inspection report.
+ * Fetch a single inspection report through its unguessable share key.
  *
- * @param {string|number} id
+ * @param {string} publicId — UUID share key from the link/code the expert sent
  * @returns {Promise<InspectionReport>}
- * @throws {Error} on network failure or non-2xx response
+ * @throws {Error} on network failure or non-2xx response (404 = unknown key,
+ *   400 = malformed key)
  */
-export async function getReport(id) {
-  const response = await fetch(`${BASE_URL}/api/inspections/${id}`)
+export async function getReport(publicId) {
+  const response = await fetch(`${BASE_URL}/api/inspections/public/${publicId}`)
   if (!response.ok) {
-    const error = new Error(`Failed to load report ${id}: ${response.status} ${response.statusText}`)
+    const error = new Error(`Failed to load report ${publicId}: ${response.status} ${response.statusText}`)
     error.status = response.status
     throw error
   }
@@ -18,12 +19,13 @@ export async function getReport(id) {
 }
 
 /**
- * Inspection report returned by GET /api/inspections/{id}.
+ * Inspection report returned by GET /api/inspections/public/{publicId}.
  * Boolean part fields: true = repainted/repaired («دارد»), false = healthy («ندارد»).
  *
  * @typedef {Object} InspectionReport
- * @property {number|string} id
- * @property {string} inspectionDate            — "yyyy-MM-dd'T'HH:mm", local time
+ * @property {number|string} id                    — internal id (expert app use)
+ * @property {string} publicId                     — UUID share key used by the web
+ * @property {string} inspectionDate               — "yyyy-MM-dd'T'HH:mm", local time
  * @property {string} expertName
  * @property {string} expertPhoneNumber
  * @property {string} fullName

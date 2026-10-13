@@ -13,9 +13,10 @@ import ExpertCard from '@/components/ExpertCard.vue'
 import TermsCard from '@/components/TermsCard.vue'
 
 const route = useRoute()
-const { report, loading, error, reload } = useReport(computed(() => route.params.id))
+const { report, loading, error, reload } = useReport(computed(() => route.params.publicId))
 
-const notFound = computed(() => error.value?.status === 404)
+// 404 = unknown share key, 400 = malformed key (e.g. a mistyped code)
+const notFound = computed(() => error.value?.status === 404 || error.value?.status === 400)
 </script>
 
 <template>
