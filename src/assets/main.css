@@ -1,0 +1,122 @@
+/*
+ * Global styles — mobile-first.
+ * Base rules target ~390px wide screens; everything above that is opt-in
+ * via the desktop breakpoint at the bottom of this file.
+ */
+
+:root {
+  --green: #2f5d4c;
+  --green-dark: #1f3d33;
+  --soft: #e6efe9;
+  --bg: #eef2ef;
+  --damaged: #e8590c;
+  --damaged-bg: #fbe3d1;
+  --damaged-text: #8a3a0e;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Vazirmatn', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  color: var(--green-dark);
+  background-color: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+/* Shared card style used by all report cards */
+.card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 2px 10px rgb(31 61 51 / 0.08);
+}
+
+.card__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--green-dark);
+  margin-bottom: 12px;
+}
+
+/* Shared labeled rows used by the customer and car cards */
+.data-list__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+}
+
+.data-list__row + .data-list__row {
+  border-top: 1px solid var(--bg);
+}
+
+.data-list__row dt {
+  flex-shrink: 0;
+  font-size: 0.875rem;
+  color: var(--green);
+}
+
+.data-list__row dd {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--green-dark);
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+  overflow-wrap: break-word;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+/*
+ * Desktop breakpoint.
+ * Mobile rules above stay unconditional; desktop-only adjustments go here.
+ */
+@media (min-width: 1024px) {
+  .card {
+    padding: 24px;
+  }
+
+  .card__title {
+    font-size: 1.125rem;
+  }
+}
