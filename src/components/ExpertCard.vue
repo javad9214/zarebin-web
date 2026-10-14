@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import { toInternationalPhone } from '@/utils/phone'
 
 const props = defineProps({
   report: {
@@ -8,10 +9,10 @@ const props = defineProps({
   },
 })
 
-// wa.me needs the international format without "+" — convert a leading 0 to 98
-const whatsappNumber = computed(() =>
-  props.report.expertPhoneNumber.replace(/\D/g, '').replace(/^0/, '98'),
-)
+const phone = computed(() => toInternationalPhone(props.report.expertPhoneNumber))
+
+// wa.me needs the international format without "+"
+const whatsappNumber = computed(() => phone.value.replace('+', ''))
 </script>
 
 <template>
@@ -19,10 +20,10 @@ const whatsappNumber = computed(() =>
     <h2 class="card__title">کارشناس</h2>
     <div class="expert-card__info">
       <p class="expert-card__name">{{ report.expertName }}</p>
-      <p class="expert-card__phone" dir="ltr">{{ report.expertPhoneNumber }}</p>
+      <p class="expert-card__phone" dir="ltr">{{ phone }}</p>
     </div>
     <div class="expert-card__actions">
-      <a class="expert-card__btn expert-card__btn--call" :href="`tel:${report.expertPhoneNumber}`">
+      <a class="expert-card__btn expert-card__btn--call" :href="`tel:${phone}`">
         تماس
       </a>
       <a

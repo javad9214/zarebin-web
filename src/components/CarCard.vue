@@ -1,9 +1,29 @@
 <script setup>
-defineProps({
+import { computed } from 'vue'
+
+import IranianPlate from '@/components/IranianPlate.vue'
+import { parsePlate } from '@/utils/plate'
+
+const props = defineProps({
   report: {
     type: Object,
     required: true,
   },
+})
+
+// Structured plate from the API (preferred); the string branch is a fallback
+// for responses served by a pre-plate-object backend during redeploy.
+const plate = computed(() => {
+  const value = props.report?.plateNumber
+  if (value && typeof value === 'object') {
+    return {
+      firstTwo: String(value.firstTwo ?? ''),
+      threeDigits: String(value.threeDigits ?? ''),
+      letter: String(value.letter ?? ''),
+      iranCode: String(value.iranCode ?? ''),
+    }
+  }
+  return parsePlate(value)
 })
 </script>
 
@@ -21,7 +41,10 @@ defineProps({
       </div>
       <div class="data-list__row">
         <dt>شماره پلاک</dt>
-        <dd dir="ltr">{{ report.plateNumber }}</dd>
+        <dd dir="ltr">
+          <IranianPlate v-if="plate" :plate="plate" />
+          <template v-else>{{ report.plateNumber }}</template>
+        </dd>
       </div>
     </dl>
   </section>

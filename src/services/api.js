@@ -33,7 +33,7 @@ export async function getReport(publicId) {
  * @property {string} carName
  * @property {string} carModel
  * @property {string} chassisNumber
- * @property {string} plateNumber
+ * @property {{firstTwo: string, letter: string, threeDigits: string, iranCode: string}} plateNumber — structured plate parts rendered by the plate component
  * @property {string} expertDescription
  * @property {boolean} roof
  * @property {boolean} chassis

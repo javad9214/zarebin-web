@@ -1,10 +1,15 @@
 <script setup>
-defineProps({
+import { computed } from 'vue'
+import { toInternationalPhone } from '@/utils/phone'
+
+const props = defineProps({
   report: {
     type: Object,
     required: true,
   },
 })
+
+const phone = computed(() => toInternationalPhone(props.report.phoneNumber))
 </script>
 
 <template>
@@ -17,7 +22,7 @@ defineProps({
       </div>
       <div class="data-list__row">
         <dt>شماره تماس</dt>
-        <dd dir="ltr">{{ report.phoneNumber }}</dd>
+        <dd dir="ltr">{{ phone }}</dd>
       </div>
     </dl>
   </section>
