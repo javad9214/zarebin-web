@@ -35,7 +35,8 @@ const plate = computed(() => {
         <dt>خودرو</dt>
         <dd>{{ report.carName }} {{ report.carModel }}</dd>
       </div>
-      <div class="data-list__row">
+      <!-- Optional since the experts may leave the chassis number blank. -->
+      <div v-if="report.chassisNumber" class="data-list__row">
         <dt>شماره شاسی</dt>
         <dd dir="ltr">{{ report.chassisNumber }}</dd>
       </div>

@@ -36,7 +36,9 @@ export async function getReport(publicId) {
  * @property {{firstTwo: string, letter: string, threeDigits: string, iranCode: string}} plateNumber — structured plate parts rendered by the plate component
  * @property {string} expertDescription
  * @property {boolean} roof
- * @property {boolean} chassis
+ * @property {boolean|null} frontChassis   — null on rows predating the chassis split
+ * @property {boolean|null} rearChassis    — null on rows predating the chassis split
+ * @property {boolean|null} pillars        — null on rows predating the pillars flag
  * @property {boolean} frontLeftFender
  * @property {boolean} frontRightFender
  * @property {boolean} rearLeftFender
