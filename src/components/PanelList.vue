@@ -8,8 +8,8 @@ defineProps({
 
 const rows = [
   { key: 'roof', label: 'سقف' },
-  { key: 'frontChassis', label: 'شاسی جلو' },
-  { key: 'rearChassis', label: 'شاسی عقب' },
+  { key: 'frontChassis', label: 'شاسی های جلو' },
+  { key: 'rearChassis', label: 'شاسی های عقب' },
   { key: 'pillars', label: 'ستون‌ها' },
   { key: 'frontLeftFender', label: 'گلگیر جلو چپ' },
   { key: 'frontRightFender', label: 'گلگیر جلو راست' },
